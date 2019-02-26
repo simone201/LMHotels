@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<it.simonerenzo.lmhotels.ui.widgets.SwipeRefreshLayoutWithEmpty
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/hotelSwipe"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hotelList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:clipToPadding="false"
+            android:padding="8dp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/hotelEmptyView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/hotelEmptyAnim"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                app:lottie_rawRes="@raw/empty_list"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="false" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/text_empty_hotels"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </FrameLayout>
+
+</it.simonerenzo.lmhotels.ui.widgets.SwipeRefreshLayoutWithEmpty>

@@ -1,5 +1,7 @@
 package it.simonerenzo.lmhotels.net.models
 
+data class HotelsResponse(val hotels: List<Hotel>)
+
 data class Hotel(val id: Int,
                  val name: String,
                  val location: Location,
@@ -7,7 +9,7 @@ data class Hotel(val id: Int,
                  val checkIn: CheckHours,
                  val checkOut: CheckHours,
                  val contact: Contact,
-                 val images: List<String>,
+                 val images: List<String>?,
                  val userRating: Float)
 
 data class Location(val address: String,
