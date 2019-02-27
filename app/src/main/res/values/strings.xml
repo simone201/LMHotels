@@ -18,4 +18,9 @@
     <string name="title_menu_about">About</string>
 
     <string name="text_empty_hotels">No Hotels Found!</string>
+
+    <string name="text_details_rating">User Rating:</string>
+    <string name="text_details_checkin">Check-In:</string>
+    <string name="text_details_checkout">Check-Out:</string>
+    <string name="text_details_checkhours_template"><![CDATA[<b>From:</b> %1$s<br/><b>To:</b> %2$s]]></string>
 </resources>

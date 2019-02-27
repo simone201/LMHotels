@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/hotelDetailsContent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_light"
     tools:context=".activities.HotelDetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -14,12 +16,14 @@
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+        <net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout
             android:id="@+id/hotelDetailsBarLayout"
             android:layout_width="match_parent"
             android:layout_height="256dp"
+            android:maxLines="3"
             app:titleEnabled="true"
             app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@style/ExpandedHotelDetailTitle"
             app:expandedTitleMarginStart="@dimen/activity_vertical_margin"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
@@ -28,10 +32,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/md_blue_500"
-                android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.5"/>
+
+            <hyogeun.github.com.colorratingbarlib.ColorRatingBar
+                android:id="@+id/hotelDetailsStars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|top"
+                android:layout_margin="8dp"
+                android:numStars="5"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                app:changeable="false"
+                app:empty_color="@android:color/transparent"
+                app:progress_color="@color/md_yellow_500" />
 
             <View
                 android:layout_width="match_parent"
@@ -47,7 +62,7 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"/>
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -55,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin"
+        android:padding="8dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <include layout="@layout/details_hotel" />

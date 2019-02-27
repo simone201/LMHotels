@@ -26,7 +26,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.HotelDetailsActivity" />
+        <activity android:name=".activities.HotelDetailsActivity"
+            android:theme="@style/SwipeBackTheme" />
 
     </application>
 

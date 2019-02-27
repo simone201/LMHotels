@@ -52,7 +52,7 @@
                 android:numStars="5"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 app:changeable="false"
-                app:empty_color="@color/md_white_1000"
+                app:empty_color="@color/md_grey_300"
                 app:progress_color="@color/md_yellow_500" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
