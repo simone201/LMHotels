@@ -124,6 +124,8 @@ class HomeFragment : Fragment(),
             .subscribe(
                 { res -> fillList(res.hotels) },
                 { e ->
+                    toggleEmpty(itemAdapter.itemList.isEmpty)
+
                     if (e is HttpException) {
                         if (e.code() == 401) {
                             activity?.finish()
