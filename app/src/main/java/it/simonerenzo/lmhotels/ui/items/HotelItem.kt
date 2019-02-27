@@ -33,6 +33,12 @@ class HotelItem(val hotelItem: Hotel)
         override fun bindView(item: HotelItem, payloads: List<Any>) {
             val hotel = item.hotelItem
 
+            val transparent = itemView.resources.getDrawable(android.R.color.transparent, null)
+
+            image.background = transparent
+            name.background = transparent
+            address.background = transparent
+
             Glide.with(itemView)
                 .load(hotel.images?.get(0) ?: EMPTY_IMAGE)
                 .into(image)

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.lottie.LottieAnimationView
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.IAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -38,6 +39,7 @@ class HomeFragment : Fragment(),
     private val hotelsClient by lazyOf(HotelsService.create())
 
     private val hotelSwipe by bindView<SwipeRefreshLayout>(R.id.hotelSwipe)
+    private val hotelShimmer by bindView<ShimmerFrameLayout>(R.id.hotelListShimmer)
     private val hotelList by bindView<RecyclerView>(R.id.hotelList)
     private val hotelEmpty by bindView<LinearLayoutCompat>(R.id.hotelEmptyView)
     private val hotelEmptyAnim by bindView<LottieAnimationView>(R.id.hotelEmptyAnim)
@@ -75,6 +77,7 @@ class HomeFragment : Fragment(),
         super.onResume()
 
         if (itemAdapter.itemList.isEmpty) {
+            hotelShimmer.startShimmer()
             toggleEmpty(false)
             getData()
         }
@@ -110,7 +113,14 @@ class HomeFragment : Fragment(),
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { hotelSwipe.isRefreshing = true }
-            .doAfterTerminate { hotelSwipe.isRefreshing = false }
+            .doAfterTerminate {
+                hotelSwipe.isRefreshing = false
+
+                if (hotelShimmer.isShimmerStarted) {
+                    hotelShimmer.stopShimmer()
+                    hotelShimmer.visibility = View.GONE
+                }
+            }
             .subscribe(
                 { res -> fillList(res.hotels) },
                 { e ->

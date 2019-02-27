@@ -23,7 +23,8 @@
             android:id="@+id/hotelCardImage"
             android:layout_width="match_parent"
             android:layout_height="128dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:background="@color/md_grey_400" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -38,7 +39,8 @@
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:textSize="18sp"
-                android:fontFamily="sans-serif-light" />
+                android:fontFamily="sans-serif-light"
+                android:background="@color/md_grey_400" />
 
             <hyogeun.github.com.colorratingbarlib.ColorRatingBar
                 android:id="@+id/hotelStars"
@@ -48,7 +50,6 @@
                 android:gravity="end"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:rating="3"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 app:changeable="false"
                 app:empty_color="@color/md_white_1000"
@@ -73,7 +74,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="4dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:background="@color/md_grey_400" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
