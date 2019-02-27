@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.IAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.listeners.OnClickListener
 import com.mikepenz.itemanimators.AlphaInAnimator
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.trello.rxlifecycle3.android.lifecycle.kotlin.bindToLifecycle
@@ -20,15 +22,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import it.simonerenzo.lmhotels.R
+import it.simonerenzo.lmhotels.activities.HotelDetailsActivity
 import it.simonerenzo.lmhotels.net.models.Hotel
 import it.simonerenzo.lmhotels.net.services.HotelsService
 import it.simonerenzo.lmhotels.ui.items.HotelItem
 import kotterknife.bindView
 import org.jetbrains.anko.design.snackbar
+import org.jetbrains.anko.support.v4.startActivity
 import retrofit2.HttpException
 
 class HomeFragment : Fragment(),
-    SwipeRefreshLayout.OnRefreshListener {
+    SwipeRefreshLayout.OnRefreshListener,
+    OnClickListener<HotelItem> {
 
     private val hotelsClient by lazyOf(HotelsService.create())
 
@@ -57,6 +62,7 @@ class HomeFragment : Fragment(),
         hotelSwipe.setOnRefreshListener(this)
 
         listAdapter.withSelectable(true)
+        listAdapter.withOnClickListener(this)
 
         hotelList.addItemDecoration(LayoutMarginDecoration(1, 32))
         hotelList.overScrollMode = View.OVER_SCROLL_NEVER
@@ -72,6 +78,14 @@ class HomeFragment : Fragment(),
             toggleEmpty(false)
             getData()
         }
+    }
+
+    override fun onClick(v: View?,
+                         adapter: IAdapter<HotelItem>,
+                         item: HotelItem,
+                         position: Int): Boolean {
+        startActivity<HotelDetailsActivity>("item" to item.hotelItem)
+        return true
     }
 
     override fun onRefresh() {
