@@ -23,4 +23,6 @@
     <string name="text_details_checkin">Check-In</string>
     <string name="text_details_checkout">Check-Out</string>
     <string name="text_details_checkhours_template"><![CDATA[<b>From:</b> %1$s<br/><b>To:</b> %2$s]]></string>
+    <string name="text_details_phone">Phone Number</string>
+    <string name="text_details_email">E-Mail</string>
 </resources>

@@ -27,9 +27,11 @@ import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrPosition
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import it.simonerenzo.lmhotels.R
+import it.simonerenzo.lmhotels.net.models.Contact
 import it.simonerenzo.lmhotels.net.models.Hotel
 import it.simonerenzo.lmhotels.ui.items.GalleryItem
 import kotlinx.android.synthetic.main.activity_hotel_details.*
+import kotlinx.android.synthetic.main.card_details_contact.*
 import kotlinx.android.synthetic.main.card_details_gallery.*
 import kotlinx.android.synthetic.main.card_details_general.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -61,8 +63,9 @@ class HotelDetailsActivity : AppCompatActivity(), OnClickListener<GalleryItem> {
             title = hotel.name
         }
 
-        setupLayout(hotel)
+        setupGeneralDetails(hotel)
         setupGallery(hotel.images ?: emptyList())
+        setupContact(hotel.contact)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -96,7 +99,7 @@ class HotelDetailsActivity : AppCompatActivity(), OnClickListener<GalleryItem> {
         return true
     }
 
-    private fun setupLayout(hotel: Hotel) {
+    private fun setupGeneralDetails(hotel: Hotel) {
         Glide.with(this)
             .load(hotel.images?.get(0))
             .into(hotelDetailsHeader)
@@ -142,6 +145,11 @@ class HotelDetailsActivity : AppCompatActivity(), OnClickListener<GalleryItem> {
         if (itemAdapter.itemList.isEmpty) {
             hotelGallery.visibility = View.GONE
         }
+    }
+
+    private fun setupContact(contact: Contact) {
+        hotelPhone.text = contact.phoneNumber
+        hotelEmail.text = contact.email
     }
 
 }

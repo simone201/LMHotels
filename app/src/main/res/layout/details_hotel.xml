@@ -9,4 +9,6 @@
 
     <include layout="@layout/card_details_gallery" />
 
+    <include layout="@layout/card_details_contact" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>
