@@ -31,6 +31,23 @@
 
                     <include layout="@layout/item_hotel" />
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@android:color/transparent"
+                        android:layout_marginTop="@dimen/activity_vertical_margin" />
+
+
+                    <include layout="@layout/item_hotel" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@android:color/transparent"
+                        android:layout_marginTop="@dimen/activity_vertical_margin" />
+
+                    <include layout="@layout/item_hotel" />
+
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
             </com.facebook.shimmer.ShimmerFrameLayout>
