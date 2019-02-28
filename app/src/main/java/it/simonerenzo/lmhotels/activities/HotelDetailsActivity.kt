@@ -13,6 +13,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cn.nekocode.badge.BadgeDrawable
 import com.bumptech.glide.Glide
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.IAdapter
@@ -20,6 +21,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.listeners.OnClickListener
 import com.mikepenz.itemanimators.AlphaInAnimator
 import com.mikepenz.materialize.MaterializeBuilder
+import com.mikepenz.materialize.color.Material
 import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrPosition
@@ -100,7 +102,15 @@ class HotelDetailsActivity : AppCompatActivity(), OnClickListener<GalleryItem> {
             .into(hotelDetailsHeader)
 
         hotelDetailsStars.rating = hotel.stars.toFloat()
-        hotelUserRating.rating = hotel.userRating
+
+        hotelUserRating.text = BadgeDrawable.Builder()
+            .type(BadgeDrawable.TYPE_WITH_TWO_TEXT_COMPLEMENTARY)
+            .badgeColor(Material.Amber._500.asColor)
+            .text1(hotel.userRating.toString())
+            .text2("10")
+            .strokeWidth(2)
+            .build()
+            .toSpannable()
 
         val hoursTemplate = resources.getString(R.string.text_details_checkhours_template)
         hotelDetailsCheckIn.text = HtmlCompat.fromHtml(

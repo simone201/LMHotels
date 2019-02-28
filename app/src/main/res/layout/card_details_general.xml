@@ -30,17 +30,13 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/text_details_rating" />
 
-            <hyogeun.github.com.colorratingbarlib.ColorRatingBar
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/hotelUserRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="end"
-                android:numStars="10"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                app:changeable="false"
-                app:empty_color="@color/md_grey_300"
-                app:progress_color="@color/md_yellow_500" />
+                android:textSize="18sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
