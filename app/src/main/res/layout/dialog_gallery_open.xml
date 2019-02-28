@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/galleryZoomItem"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AA757575">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/galleryZoomImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:foregroundGravity="center"
+        android:scaleType="fitCenter"
+        android:elevation="6dp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
