@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <include layout="@layout/card_details_location" />
+
     <include layout="@layout/card_details_general" />
 
     <include layout="@layout/card_details_gallery" />

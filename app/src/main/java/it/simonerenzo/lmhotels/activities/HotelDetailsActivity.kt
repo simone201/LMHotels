@@ -1,8 +1,11 @@
 package it.simonerenzo.lmhotels.activities
 
+import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.nekocode.badge.BadgeDrawable
 import com.bumptech.glide.Glide
+import com.jakewharton.rxbinding2.view.RxView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.IAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -26,14 +30,18 @@ import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrPosition
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
+import com.trello.rxlifecycle3.android.lifecycle.kotlin.bindToLifecycle
 import it.simonerenzo.lmhotels.R
 import it.simonerenzo.lmhotels.net.models.Contact
 import it.simonerenzo.lmhotels.net.models.Hotel
+import it.simonerenzo.lmhotels.net.models.Location
 import it.simonerenzo.lmhotels.ui.items.GalleryItem
 import kotlinx.android.synthetic.main.activity_hotel_details.*
 import kotlinx.android.synthetic.main.card_details_contact.*
 import kotlinx.android.synthetic.main.card_details_gallery.*
 import kotlinx.android.synthetic.main.card_details_general.*
+import kotlinx.android.synthetic.main.card_details_location.*
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 
@@ -63,9 +71,11 @@ class HotelDetailsActivity : AppCompatActivity(), OnClickListener<GalleryItem> {
             title = hotel.name
         }
 
+        setupLocation(hotel.location)
         setupGeneralDetails(hotel)
         setupGallery(hotel.images ?: emptyList())
         setupContact(hotel.contact)
+        setupEvents(hotel)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -97,6 +107,11 @@ class HotelDetailsActivity : AppCompatActivity(), OnClickListener<GalleryItem> {
 
         popup.show()
         return true
+    }
+
+    private fun setupLocation(location: Location) {
+        hotelDetailsAddress.text = location.address
+        hotelDetailsCity.text = location.city
     }
 
     private fun setupGeneralDetails(hotel: Hotel) {
@@ -150,6 +165,25 @@ class HotelDetailsActivity : AppCompatActivity(), OnClickListener<GalleryItem> {
     private fun setupContact(contact: Contact) {
         hotelPhone.text = contact.phoneNumber
         hotelEmail.text = contact.email
+    }
+
+    @SuppressLint("CheckResult")
+    private fun setupEvents(hotel: Hotel) {
+        RxView.clicks(detailsGoto)
+            .bindToLifecycle(this)
+            .subscribe {
+                val location = hotel.location
+                val gmmIntentUri = Uri.parse("google.navigation:q=${location.latitude},${location.longitude}")
+
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+
+                if (mapIntent.resolveActivity(packageManager) != null) {
+                    startActivity(mapIntent)
+                } else {
+                    hotelDetailsContent.snackbar(R.string.error_details_maps)
+                }
+            }
     }
 
 }
