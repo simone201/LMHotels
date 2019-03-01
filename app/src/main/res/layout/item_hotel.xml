@@ -66,16 +66,28 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_place_black_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/hotelAddress"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="4dp"
+                android:maxLines="2"
                 android:textSize="14sp"
                 android:background="@color/md_grey_400" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/hotelShareBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:padding="8dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_share_black_24dp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
