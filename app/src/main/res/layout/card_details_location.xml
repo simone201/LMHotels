@@ -23,6 +23,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_place_black_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -53,6 +54,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_location_city_black_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
