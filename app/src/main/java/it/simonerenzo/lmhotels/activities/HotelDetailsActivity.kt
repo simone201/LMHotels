@@ -109,11 +109,21 @@ class HotelDetailsActivity : AppCompatActivity(), OnClickListener<GalleryItem> {
         return true
     }
 
+    /**
+     * Setup Location Card
+     *
+     * @param location Location Object
+     */
     private fun setupLocation(location: Location) {
         hotelDetailsAddress.text = location.address
         hotelDetailsCity.text = location.city
     }
 
+    /**
+     * Setup General Details Card
+     *
+     * @param hotel Hotel Object
+     */
     private fun setupGeneralDetails(hotel: Hotel) {
         Glide.with(this)
             .load(hotel.images?.get(0))
@@ -139,6 +149,11 @@ class HotelDetailsActivity : AppCompatActivity(), OnClickListener<GalleryItem> {
             HtmlCompat.FROM_HTML_MODE_COMPACT)
     }
 
+    /**
+     * Setup Hotel Gallery Card
+     *
+     * @param images List of Hotel Images (URIs)
+     */
     private fun setupGallery(images: List<String>) {
         if (images.isNullOrEmpty() || images.size == 1) {
             hotelDetailsGalleryCard.visibility = View.GONE
@@ -162,11 +177,21 @@ class HotelDetailsActivity : AppCompatActivity(), OnClickListener<GalleryItem> {
         }
     }
 
+    /**
+     * Setup Contacts Card
+     *
+     * @param contact Contact Object
+     */
     private fun setupContact(contact: Contact) {
         hotelPhone.text = contact.phoneNumber
         hotelEmail.text = contact.email
     }
 
+    /**
+     * Setup UI Events handlers
+     *
+     * @param hotel Hotel Object
+     */
     @SuppressLint("CheckResult")
     private fun setupEvents(hotel: Hotel) {
         RxView.clicks(detailsGoto)

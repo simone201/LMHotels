@@ -117,6 +117,11 @@ class HomeFragment : Fragment(),
         getData()
     }
 
+    /**
+     * Toggles empty view for RecyclerView
+     *
+     * @param isEmpty Is list empty?
+     */
     private fun toggleEmpty(isEmpty: Boolean) {
         if (isEmpty) {
             hotelList.visibility = View.GONE
@@ -129,6 +134,11 @@ class HomeFragment : Fragment(),
         }
     }
 
+    /**
+     * Run GET over Hotel APIs to retrieve data
+     *
+     * @return Disposable of Retrofit request
+     */
     private fun getData() : Disposable {
         return hotelsClient.getHotels()
             .bindToLifecycle(this)
@@ -161,6 +171,14 @@ class HomeFragment : Fragment(),
             )
     }
 
+    /**
+     * Sort hotel list by stars
+     *
+     * @param itemList Hotels List in RecyclerView Adapter
+     * @param desc Allows ASC/DESC ordering
+     *
+     * @return List of hotels ordered by stars
+     */
     private fun sortByStars(itemList: List<HotelItem>, desc: Boolean): List<Hotel> {
         val hotels = itemList.map { it.hotelItem }.toMutableList()
 
@@ -171,10 +189,15 @@ class HomeFragment : Fragment(),
         return hotels
     }
 
-    private fun fillList(data: List<Hotel>) {
+    /**
+     * Fill List Adapter with Hotels
+     *
+     * @param hotels List of hotels
+     */
+    private fun fillList(hotels: List<Hotel>) {
         itemAdapter.clear()
         itemAdapter.add(
-            data.map { HotelItem(it) }
+            hotels.map { HotelItem(it) }
         )
 
         toggleEmpty(itemAdapter.itemList.isEmpty)
