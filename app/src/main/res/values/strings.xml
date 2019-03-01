@@ -16,6 +16,10 @@
 
     <string name="title_menu_home">Home</string>
     <string name="title_menu_about">About</string>
+    <string name="title_menu_sortby">Sort By</string>
+
+    <string name="title_context_sort_stars_asc">By Stars Ascending</string>
+    <string name="title_context_sort_stars_desc">By Stars Descending</string>
 
     <string name="text_empty_hotels">No Hotels Found!</string>
 

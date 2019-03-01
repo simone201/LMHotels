@@ -2,9 +2,7 @@ package it.simonerenzo.lmhotels.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,6 +45,11 @@ class HomeFragment : Fragment(),
     private val itemAdapter = ItemAdapter<HotelItem>()
     private val listAdapter = FastAdapter.with<HotelItem, ItemAdapter<HotelItem>>(itemAdapter)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -80,6 +83,25 @@ class HomeFragment : Fragment(),
             hotelShimmer.startShimmer()
             toggleEmpty(false)
             getData()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.fragment_home_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.item_sort_stars_asc -> {
+                fillList(sortByStars(itemAdapter.adapterItems, false))
+                true
+            }
+            R.id.item_sort_stars_desc -> {
+                fillList(sortByStars(itemAdapter.adapterItems, true))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -137,6 +159,16 @@ class HomeFragment : Fragment(),
                     Log.e("HTTP ERROR", "An error has occurred", e)
                 }
             )
+    }
+
+    private fun sortByStars(itemList: List<HotelItem>, desc: Boolean): List<Hotel> {
+        val hotels = itemList.map { it.hotelItem }.toMutableList()
+
+        hotels.sortBy { it.stars }.let {
+            if (desc) hotels.reverse()
+        }
+
+        return hotels
     }
 
     private fun fillList(data: List<Hotel>) {
