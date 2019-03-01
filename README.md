@@ -23,8 +23,11 @@ Clone this repository and import into Android Studio
 > $ git clone https://github.com/simone201/LMHotels.git
 
 In the project folder, using your command line to build a debug APK:
+
 > $ gradlew assembleDebug
+
 or to directly install it in the running emulator/device:
+
 > $ gradlew installDebug
 
 ## License
